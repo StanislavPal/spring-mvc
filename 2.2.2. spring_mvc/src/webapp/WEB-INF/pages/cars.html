@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <th>Model</th>
+            <th>Series</th>
+            <th>Color</th>
+        </tr>
+        <th:block th:each="car : ${cars}">
+            <tr>
+                <td th:text="${car.model}"></td>
+                <td th:text="${car.series}"></td>
+                <td th:text="${car.color}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+<a href="/calculator?number1=2&number2=3&action=mult">calculator (2x3)</a>
+<br/>
+<a href="/car">car</a>
+</body>
+</html>

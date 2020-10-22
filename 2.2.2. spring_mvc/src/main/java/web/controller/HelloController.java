@@ -6,22 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.model.Car;
+import web.model.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class HelloController {
-	private List<Car> cars = new ArrayList<>();
-
-	HelloController() {
-		cars.add(new Car("ВАЗ", 1, "Красный"));
-		cars.add(new Car("ЗАЗ", 1, "Зеленый"));
-		cars.add(new Car("УАЗ", 1, "Черный"));
-		cars.add(new Car("ЛиАЗ", 1, "Желтый"));
-		cars.add(new Car("ВАЗ", 2, "Брызги шампанского"));
-		cars.add(new Car("ЗАЗ", 2, "Красный"));
-	}
 
 	@GetMapping(value = "/")
 	public String printWelcome(ModelMap model) {
@@ -34,13 +25,11 @@ public class HelloController {
 	}
 	
 	@GetMapping(value = "/car")
-	public String printCarList(ModelMap model) {
-		List<String> messages = new ArrayList<>();
-		messages.add("Hello!");
-		messages.add("I'm a car list");
-		messages.add("А ты что думал?");
-		model.addAttribute("messages", messages);
-		return "index";
+	public String printCarList(@RequestParam(value="count", required = false) Integer count,
+							   ModelMap model) {
+		List<Car> cars = new Service().getCarList(count);
+		model.addAttribute("cars", cars);
+		return "cars";
 	}
 
 	@GetMapping(value = "/calculator")
