@@ -23,47 +23,4 @@ public class HelloController {
 		model.addAttribute("messages", messages);
 		return "index";
 	}
-	
-	@GetMapping(value = "/car")
-	public String printCarList(@RequestParam(value="count", required = false) Integer count,
-							   ModelMap model) {
-		List<Car> cars = new Service().getCarList(count);
-		model.addAttribute("cars", cars);
-		return "cars";
-	}
-
-	@GetMapping(value = "/calculator")
-	public String AlishevCalculator(@RequestParam(value="number1") int number1,
-									@RequestParam(value="number2") int number2,
-									@RequestParam(value="action") String action,
-									ModelMap model) {
-		List<String> messages = new ArrayList<>();
-		double result = 0;
-		String act = "";
-		switch (action) {
-			case "mult": {
-				result = number1 * number2;
-				act = " x ";
-				break;
-			}
-			case "div": {
-				result = (double) number1 / number2;
-				act = " / ";
-				break;
-			}
-			case "add": {
-				result = number1 + number2;
-				act = " + ";
-				break;
-			}
-			case "sub": {
-				result = number1 - number2;
-				act = " - ";
-				break;
-			}
-		}
-		messages.add(number1 + act + number2 + " = " + result);
-		model.addAttribute("messages", messages);
-		return "index";
-	}
 }
